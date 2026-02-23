@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Иван",
+      "email": "test@mail.com",
+      "password": "1234"
+    },
+    {
+      "id": "49c4",
+      "name": "test1",
+      "email": "test1@test.com",
+      "password": "123"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "1",
+      "title": "Паста Карбонара",
+      "description": "Итальянская классика с беконом и сливочным соусом.",
+      "image": "https://picsum.photos/400/300",
+      "author": "ChefMaster",
+      "type": "main",
+      "difficulty": "medium"
+    },
+    {
+      "id": "2",
+      "title": "Чизкейк",
+      "description": "Нежный десерт с творожным сыром.",
+      "image": "https://picsum.photos/400/300",
+      "author": "Anna",
+      "type": "dessert",
+      "difficulty": "easy"
+    },
+    {
+      "id": "3",
+      "title": "Борщ",
+      "description": "Наваристый суп со свёклой и капустой.",
+      "image": "https://picsum.photos/400/300",
+      "author": "Иван",
+      "type": "soup",
+      "difficulty": "easy"
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Рецепт — RecipeShare</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+
+    <!-- ДЗ4: SVG-спрайт -->
+    <svg aria-hidden="true" style="display:none">
+      <use href="sprite.svg"></use>
+    </svg>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Основная навигация">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">RecipeShare</a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#nav"
+                aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Главная</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.html">Вход</a></li>
+            <li class="nav-item"><a class="nav-link" href="register.html">Регистрация</a></li>
+            <li class="nav-item"><a class="nav-link" href="profile.html">Кабинет</a></li>
+          </ul>
+          <button id="themeBtn" class="btn btn-outline-light btn-sm ms-3" aria-label="Переключить тему">🌙</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container my-4">
+      <!-- ДЗ2: aria-label на хлебных крошках -->
+      <nav aria-label="Навигационная цепочка" class="mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Рецепт</li>
+        </ol>
+      </nav>
+
+      <div class="row">
+        <!-- ДЗ2: основной контент в col без изменений, добавляем семантику внутри -->
+        <div class="col-lg-8">
+          <h1 class="mb-3" id="recipeTitle">Загрузка...</h1>
+
+          <!-- ДЗ2: alt заполняется из JS (см. ui.js) -->
+          <img id="recipeImage" class="img-fluid rounded mb-4" alt="" />
+
+          <!-- ДЗ2: section с aria-labelledby вместо просто div -->
+          <section aria-labelledby="ingr-heading">
+            <h2 id="ingr-heading" class="h4">Ингредиенты</h2>
+            <ul class="list-group mb-4">
+              <li class="list-group-item">Паста — 200 г</li>
+              <li class="list-group-item">Бекон — 150 г</li>
+              <li class="list-group-item">Сливки — 200 мл</li>
+              <li class="list-group-item">Пармезан — 50 г</li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="steps-heading">
+            <h2 id="steps-heading" class="h4">Приготовление</h2>
+            <ol class="list-group list-group-numbered mb-4">
+              <li class="list-group-item">Отварите пасту</li>
+              <li class="list-group-item">Обжарьте бекон</li>
+              <li class="list-group-item">Добавьте сливки</li>
+              <li class="list-group-item">Смешайте с пастой и сыром</li>
+            </ol>
+          </section>
+
+          <section aria-labelledby="video-heading">
+            <h2 id="video-heading" class="h4">Видео приготовления</h2>
+            <div class="ratio ratio-16x9 mb-4">
+              <iframe src="https://www.youtube.com/embed/3AAdKl1UYZs"
+                      title="Видео: как приготовить рецепт"
+                      allowfullscreen loading="lazy"></iframe>
+            </div>
+          </section>
+
+          <!-- ДЗ4: SVG иконка сердца. ДЗ2: aria-pressed -->
+          <button class="btn btn-outline-danger mb-4" id="likeBtn"
+                  aria-pressed="false" aria-label="Нравится">
+            <svg width="18" height="18" aria-hidden="true" focusable="false">
+              <use href="sprite.svg#icon-heart"></use>
+            </svg>
+            Нравится
+          </button>
+
+          <section aria-labelledby="comments-heading">
+            <h2 id="comments-heading" class="h4">Комментарии</h2>
+
+            <div id="commentsList">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <strong>Анна</strong>
+                  <p class="mb-0">Очень вкусно получилось!</p>
+                </div>
+              </div>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <strong>Игорь</strong>
+                  <p class="mb-0">Добавил чеснок — стало ещё лучше.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h3 class="h5">Оставить комментарий</h3>
+                <!-- ДЗ2: label для textarea -->
+                <label for="commentText" class="visually-hidden">Текст комментария</label>
+                <textarea id="commentText" class="form-control mb-3" rows="3"
+                          placeholder="Ваш комментарий..."></textarea>
+                <!-- ДЗ4: SVG иконка комментария -->
+                <button id="submitComment" class="btn btn-primary">
+                  <svg width="16" height="16" aria-hidden="true" focusable="false">
+                    <use href="sprite.svg#icon-comment"></use>
+                  </svg>
+                  Отправить
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ДЗ2: aside для боковой колонки -->
+        <aside class="col-lg-4" aria-label="Информация о рецепте">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h2 class="h5">Автор</h2>
+              <!-- ДЗ4: SVG иконка пользователя -->
+              <p class="mb-1">
+                <svg width="16" height="16" aria-hidden="true" focusable="false">
+                  <use href="sprite.svg#icon-user"></use>
+                </svg>
+                <strong>ChefMaster</strong>
+              </p>
+              <!-- ДЗ2: aria-pressed на кнопке подписки -->
+              <button id="subscribeBtn" class="btn btn-outline-primary btn-sm"
+                      aria-pressed="false">Подписаться</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h2 class="h5">Информация</h2>
+              <p class="mb-1">Сложность: Средняя</p>
+              <p class="mb-1">Время: 30 мин</p>
+              <p class="mb-0">Тип: Основное блюдо</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/ui.js"></script>
+  </body>
+</html>

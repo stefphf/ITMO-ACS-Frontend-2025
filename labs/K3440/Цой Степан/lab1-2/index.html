@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeShare</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+
+    <!-- ДЗ4: SVG-спрайт (скрытый, иконки берём отсюда через <use>) -->
+    <svg aria-hidden="true" style="display:none">
+      <use href="sprite.svg"></use>
+    </svg>
+
+    <!-- ДЗ2: aria-label на nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Основная навигация">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">RecipeShare</a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#nav"
+                aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="nav" class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <!-- ДЗ2: aria-current="page" на активной ссылке -->
+              <a class="nav-link active" aria-current="page" href="index.html">Главная</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="login.html">Вход</a></li>
+            <li class="nav-item"><a class="nav-link" href="register.html">Регистрация</a></li>
+            <li class="nav-item"><a class="nav-link" href="profile.html">Кабинет</a></li>
+          </ul>
+          <!-- ДЗ3: кнопка переключения темы -->
+          <button id="themeBtn" class="btn btn-outline-light btn-sm ms-3" aria-label="Переключить тему">🌙</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ДЗ2: тег <main> для основного контента -->
+    <main class="container my-4">
+      <h1 class="mb-4">Рецепты</h1>
+
+      <!-- ДЗ2: role="search" на блоке поиска -->
+      <div class="row mb-3" role="search">
+        <div class="col-md-8">
+          <!-- ДЗ2: label для поля поиска -->
+          <label for="searchInput" class="visually-hidden">Поиск рецептов</label>
+          <input id="searchInput" class="form-control" placeholder="Поиск рецептов..." />
+        </div>
+        <div class="col-md-4">
+          <!-- ДЗ4: SVG иконка из спрайта -->
+          <button class="btn btn-outline-secondary w-100"
+                  data-bs-toggle="modal" data-bs-target="#filterModal"
+                  aria-label="Открыть фильтры">
+            <svg width="16" height="16" aria-hidden="true" focusable="false">
+              <use href="sprite.svg#icon-filter"></use>
+            </svg>
+            Фильтры
+          </button>
+        </div>
+      </div>
+
+      <!-- Карточки рецептов (заполняются из ui.js через API) -->
+      <div class="row g-4" id="recipesGrid"></div>
+    </main>
+
+    <!-- Модальное окно фильтра. ДЗ2: aria-labelledby, aria-modal -->
+    <div class="modal fade" id="filterModal" tabindex="-1"
+         aria-labelledby="filterModalLabel" aria-modal="true" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="filterModalLabel">Фильтры</h2>
+            <button class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+          </div>
+          <div class="modal-body">
+            <label for="filterType" class="form-label">Тип блюда</label>
+            <select id="filterType" class="form-select mb-3">
+              <option value="">Любой</option>
+              <option value="dessert">Десерт</option>
+              <option value="soup">Суп</option>
+              <option value="main">Основное</option>
+            </select>
+
+            <label for="filterDiff" class="form-label">Сложность</label>
+            <select id="filterDiff" class="form-select">
+              <option value="">Любая</option>
+              <option value="easy">Легко</option>
+              <option value="medium">Средне</option>
+              <option value="hard">Сложно</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <button id="applyFilterBtn" class="btn btn-primary" data-bs-dismiss="modal">Применить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/ui.js"></script>
+  </body>
+</html>
